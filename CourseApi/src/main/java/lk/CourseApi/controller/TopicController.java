@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import lk.CourseApi.service.TopicService;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 @RestController
 @RequestMapping("/api")
@@ -38,6 +40,21 @@ public class TopicController {
 
         topicService.addTopic(topic);
     }
+
+    @PutMapping("/topics/{id}")
+    public void updateTopic(@PathVariable String id,
+                            @RequestBody Topic topic){
+
+
+    topicService.updateTopic(id,topic);
+    }
+
+    @DeleteMapping("/topics/{id}")
+    public void deleteTopic(@PathVariable String id){
+
+        topicService.deleteTopic(id);
+    }
+
    
     
 
