@@ -48,7 +48,7 @@ public class TopicController {
                             @RequestBody TopicRequest topicRequest){
 
 
-    topicService.updateTopic(id,topicRequest);
+        topicService.updateTopic(id,topicRequest);
     }
 
     @DeleteMapping("/topics/{id}")

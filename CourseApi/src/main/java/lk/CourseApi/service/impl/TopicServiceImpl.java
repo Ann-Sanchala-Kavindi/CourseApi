@@ -79,7 +79,7 @@ public class TopicServiceImpl implements TopicService {
 
         );
 
-        topic.setId(topicRequest.getId());
+        //topic.setId(topicRequest.getId());
         topic.setName(topicRequest.getName());
         topic.setDescription(topicRequest.getDescription());
 
