@@ -2,65 +2,96 @@ package lk.CourseApi.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import lk.CourseApi.model.Topic;
 import lk.CourseApi.service.TopicService;
+import lk.CourseApi.repository.TopicRepository;
+import lk.CourseApi.controller.request.TopicRequest;
+import lk.CourseApi.controller.response.TopicResponse;
 
 @Service
 public class TopicServiceImpl implements TopicService {
 
-
-    private List<Topic> topics=new ArrayList<>(List.of(
-
-        new Topic("T100","Java","Java is a high-level, object-oriented programming language"),
-        new Topic("T101","Python","Python is a high-level, interpreted programming language"),
-        new Topic("T102","JavaScript","JavaScript is a versatile programming language primarily used for web development"),
-        new Topic("T103","Docker","Docker is a platform that allows developers to automate the deployment of applications inside lightweight, portable containers")
-
-
-    ));
+    @Autowired
+    private TopicRepository topicRepository;
 
     @Override
-    public List<Topic> getAllTopics() {
+    public List<TopicResponse> getAllTopics() {
 
-        return topics;
+        List<Topic> topics=topicRepository.findAll();
+
+        List<TopicResponse> topicResponses=new ArrayList<>();
+
+        for(Topic topic:topics){
+
+            TopicResponse topicResponse=new TopicResponse();
+
+            topicResponse.setId(topic.getId());
+            topicResponse.setName(topic.getName()); 
+            topicResponse.setDescription(topic.getDescription());
+
+            topicResponses.add(topicResponse);
+
+
+        }
+
+        return topicResponses;
+
+        
     }
 
 
     @Override
-    public Topic getTopic(String id) {
+    public TopicResponse getTopic(Long id) {
 
-        return topics.stream().filter(t -> t.getId().equals(id)).findFirst().get();
+        Topic topic=topicRepository.findById(id).orElseThrow(
+            () -> new RuntimeException("Topic not found with Id " +id)
+        );
+
+        TopicResponse topicResponse=new TopicResponse();
+
+        topicResponse.setId(topic.getId());
+        topicResponse.setName(topic.getName());
+        topicResponse.setDescription(topic.getDescription());
+
+        return topicResponse;
+   
+    }
+
+    @Override
+    public void addTopic(TopicRequest topicRequest){
+
+        Topic topic=new Topic();
+
+        //topic.setId(topicRequest.getId());
+        topic.setName(topicRequest.getName());
+        topic.setDescription(topicRequest.getDescription());
+
+        topicRepository.save(topic);
+    }
+
+    @Override
+    public void updateTopic(Long id,TopicRequest topicRequest){
+
+        Topic topic=topicRepository.findById(id).orElseThrow(
+            () -> new RuntimeException("Topic not found with Id " +id)
+
+        );
+
+        topic.setId(topicRequest.getId());
+        topic.setName(topicRequest.getName());
+        topic.setDescription(topicRequest.getDescription());
+
+        topicRepository.save(topic);
 
         
     }
 
     @Override
-    public void addTopic(Topic topic){
+    public void deleteTopic(Long id){
 
-        topics.add(topic);
-    }
-
-    @Override
-    public void updateTopic(String id,Topic topic){
-
-        for(int i=0;i<topics.size();i++){
-
-            Topic t=topics.get(i);
-
-            if(t.getId().equals(id)){
-
-                topics.set(i,topic);
-
-                return;
-            }
-        }
-    }
-
-    @Override
-    public void deleteTopic(String id){
-
-        topics.removeIf(t -> t.getId().equals(id));    
+        topicRepository.deleteById(id); 
     }
 
     

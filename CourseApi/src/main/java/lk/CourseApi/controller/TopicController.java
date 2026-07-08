@@ -2,7 +2,9 @@ package lk.CourseApi.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import lk.CourseApi.model.Topic;
+
+import lk.CourseApi.controller.request.TopicRequest;
+import lk.CourseApi.controller.response.TopicResponse;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,35 +24,35 @@ public class TopicController {
 
 
     @GetMapping("/topics")
-    public List<Topic>  getAllTopics(){
+    public List<TopicResponse>  getAllTopics(){
 
         return topicService.getAllTopics();
   
     }
 
     @GetMapping("/topics/{id}")
-    public Topic getTopic(@PathVariable String id){
+    public TopicResponse getTopic(@PathVariable Long id){
 
         return topicService.getTopic(id);
     
     }
 
     @PostMapping("/topics")
-    public void addTopic(@RequestBody Topic topic){
+    public void addTopic(@RequestBody TopicRequest topicRequest){
 
-        topicService.addTopic(topic);
+        topicService.addTopic(topicRequest);
     }
 
     @PutMapping("/topics/{id}")
-    public void updateTopic(@PathVariable String id,
-                            @RequestBody Topic topic){
+    public void updateTopic(@PathVariable Long id,
+                            @RequestBody TopicRequest topicRequest){
 
 
-    topicService.updateTopic(id,topic);
+    topicService.updateTopic(id,topicRequest);
     }
 
     @DeleteMapping("/topics/{id}")
-    public void deleteTopic(@PathVariable String id){
+    public void deleteTopic(@PathVariable Long id){
 
         topicService.deleteTopic(id);
     }
