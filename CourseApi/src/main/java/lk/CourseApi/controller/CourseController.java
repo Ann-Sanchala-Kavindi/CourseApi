@@ -42,14 +42,14 @@ public class CourseController {
 
     }
     
-    @PutMapping("courses/courseId")
+    @PutMapping("/api/courses/{courseId}")
     public void updateById(@PathVariable Long courseId,
                                  @RequestBody CourseRequest courseRequest){
 
         courseService.updateById(courseId,courseRequest);
     }
 
-    @DeleteMapping("courses/{courseId}")
+    @DeleteMapping("/api/courses/{courseId}")
     public void deleteById(@PathVariable Long courseId){
 
         courseService.deleteById(courseId);

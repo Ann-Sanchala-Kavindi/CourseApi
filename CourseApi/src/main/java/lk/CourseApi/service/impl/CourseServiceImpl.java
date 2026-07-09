@@ -34,6 +34,7 @@ public class CourseServiceImpl implements CourseService {
         course.setDescription(courseRequest.getDescription());
         course.setDuration(courseRequest.getDuration());
         course.setPrice(courseRequest.getPrice());
+        course.setTopic(topic);
         
         courseRepository.save(course);
 
@@ -58,6 +59,7 @@ public class CourseServiceImpl implements CourseService {
         courseResponse.setDescription(course.getDescription());
         courseResponse.setDuration(course.getDuration());
         courseResponse.setPrice(course.getPrice());
+        course.setTopic(topic);
 
         return courseResponse;
     }
@@ -81,6 +83,7 @@ public class CourseServiceImpl implements CourseService {
             courseResponse.setDescription(course.getDescription());
             courseResponse.setDuration(course.getDuration());
             courseResponse.setPrice(course.getPrice());
+            course.setTopic(topic);
 
             courseResponses.add(courseResponse);
 
@@ -100,6 +103,7 @@ public class CourseServiceImpl implements CourseService {
         course.setDescription(courseRequest.getDescription());
         course.setDuration(courseRequest.getDuration());
         course.setPrice(courseRequest.getPrice());
+        
 
         courseRepository.save(course);
     }
