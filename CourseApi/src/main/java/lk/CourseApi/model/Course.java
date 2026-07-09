@@ -2,23 +2,29 @@ package lk.CourseApi.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-//import jakarta.persistence.Table;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+
 
 @Entity
 @Data
-//@Table(name="topics")
 @NoArgsConstructor
-public class Topic {
+public class Course {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String description;
+    private Double duration;
+    private Double price;
 
+    @ManyToOne
+    private Topic topic;
+
+
+
+
+    
+    
 }
