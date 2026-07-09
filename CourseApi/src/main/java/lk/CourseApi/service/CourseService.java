@@ -16,6 +16,8 @@ public interface CourseService {
 
     public void deleteById( Long courseId);
 
+    public CourseResponse getCourseByName(String courseName);
+
 
     
 }

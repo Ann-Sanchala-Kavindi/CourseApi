@@ -6,15 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import lk.CourseApi.model.Topic;
 import lk.CourseApi.service.TopicService;
+import lombok.RequiredArgsConstructor;
 import lk.CourseApi.repository.TopicRepository;
 import lk.CourseApi.controller.request.TopicRequest;
 import lk.CourseApi.controller.response.TopicResponse;
 
 @Service
+@RequiredArgsConstructor
 public class TopicServiceImpl implements TopicService {
 
-    @Autowired
-    private TopicRepository topicRepository;
+    
+    private final TopicRepository topicRepository;
 
     @Override
     public List<TopicResponse> getAllTopics() {

@@ -41,6 +41,15 @@ public class CourseController {
         return courseService.getAllCourses(topicId);
 
     }
+
+
+    @GetMapping("/api/courses/{courseName}")
+    public CourseResponse getCourseByName(@PathVariable String courseName){
+
+        return courseService.getCourseByName(courseName);
+
+
+    }
     
     @PutMapping("/api/courses/{courseId}")
     public void updateById(@PathVariable Long courseId,

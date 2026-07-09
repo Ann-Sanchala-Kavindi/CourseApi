@@ -30,6 +30,7 @@ public class CourseServiceImpl implements CourseService {
 
         Course course=new Course();
 
+        course.setId(courseRequest.getId());
         course.setName(courseRequest.getName());
         course.setDescription(courseRequest.getDescription());
         course.setDuration(courseRequest.getDuration());
@@ -55,11 +56,14 @@ public class CourseServiceImpl implements CourseService {
 
         CourseResponse courseResponse=new CourseResponse();
 
+        courseResponse.setId(course.getId());
         courseResponse.setName(course.getName());
         courseResponse.setDescription(course.getDescription());
         courseResponse.setDuration(course.getDuration());
         courseResponse.setPrice(course.getPrice());
-        course.setTopic(topic);
+        courseResponse.setTopicName(topic.getName());
+        courseResponse.setTopicId(topic.getId());
+        
 
         return courseResponse;
     }
@@ -79,17 +83,42 @@ public class CourseServiceImpl implements CourseService {
 
             CourseResponse courseResponse=new CourseResponse();
 
+            courseResponse.setId(course.getId());
             courseResponse.setName(course.getName());
             courseResponse.setDescription(course.getDescription());
             courseResponse.setDuration(course.getDuration());
             courseResponse.setPrice(course.getPrice());
-            course.setTopic(topic);
+            courseResponse.setTopicName(topic.getName());
+            courseResponse.setTopicId(topic.getId());
 
             courseResponses.add(courseResponse);
 
         }
 
         return courseResponses;
+    }
+
+
+    @Override
+    public CourseResponse getCourseByName(String courseName) {
+
+        Course course= courseRepository.findByName(courseName).orElseThrow(
+            () -> new RuntimeException("Given Topic Name Not Found")
+        );
+
+        CourseResponse courseResponse=new CourseResponse();
+
+        courseResponse.setId(course.getId());
+        courseResponse.setName(course.getName());
+        courseResponse.setDescription(course.getDescription());
+        courseResponse.setDuration(course.getDuration());
+        courseResponse.setPrice(course.getPrice());
+
+        courseResponse.setTopicId(course.getId());
+        courseResponse.setTopicName(course.getName());
+
+        return courseResponse;    
+    
     }
 
     public void updateById(Long courseId, CourseRequest courseRequest){
@@ -99,6 +128,7 @@ public class CourseServiceImpl implements CourseService {
             () -> new RuntimeException("Course not found with Id " +courseId)
         );
 
+        course.setId(courseRequest.getId());
         course.setName(courseRequest.getName());
         course.setDescription(courseRequest.getDescription());
         course.setDuration(courseRequest.getDuration());
@@ -112,6 +142,8 @@ public class CourseServiceImpl implements CourseService {
 
         courseRepository.deleteById(courseId);
     }
+
+    
 
 
    

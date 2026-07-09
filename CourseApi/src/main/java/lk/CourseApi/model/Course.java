@@ -24,10 +24,5 @@ public class Course {
 
     @ManyToOne
     private Topic topic;
-
-
-
-
-    
-    
+  
 }

@@ -14,9 +14,5 @@ public class HelloController {
 
         return "Welcome to Course Portal";
     }
-
-
-
-
     
 }

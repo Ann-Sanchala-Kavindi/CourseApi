@@ -5,10 +5,5 @@ import lk.CourseApi.model.Topic;
 
 public interface TopicRepository extends JpaRepository<Topic,Long> {
 
-
-
-
-
-
-    
+   
 }
