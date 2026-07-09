@@ -68,6 +68,7 @@ public class CourseServiceImpl implements CourseService {
         return courseResponse;
     }
 
+    @Override
     public List<CourseResponse> getAllCourses(Long topicId){
 
         Topic topic=topicRepository.findById(topicId).orElseThrow(
@@ -121,6 +122,8 @@ public class CourseServiceImpl implements CourseService {
     
     }
 
+
+    @Override
     public void updateById(Long courseId, CourseRequest courseRequest){
 
         Course course=courseRepository.findById(courseId).orElseThrow(
@@ -138,6 +141,7 @@ public class CourseServiceImpl implements CourseService {
         courseRepository.save(course);
     }
 
+    @Override
     public void deleteById(Long courseId){
 
         courseRepository.deleteById(courseId);
